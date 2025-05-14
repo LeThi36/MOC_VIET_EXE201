@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MocViet", "MocViet\MocViet.csproj", "{38FC0566-3199-4A7B-A2B3-033FAC2D6D94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessLayer", "BussinessLayer\BussinessLayer.csproj", "{850A033A-5CF5-4246-9394-97AE534D4E31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{628D72E8-1CDE-4EE1-903E-EA74C844913B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38FC0566-3199-4A7B-A2B3-033FAC2D6D94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38FC0566-3199-4A7B-A2B3-033FAC2D6D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38FC0566-3199-4A7B-A2B3-033FAC2D6D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38FC0566-3199-4A7B-A2B3-033FAC2D6D94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{850A033A-5CF5-4246-9394-97AE534D4E31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{850A033A-5CF5-4246-9394-97AE534D4E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{850A033A-5CF5-4246-9394-97AE534D4E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{850A033A-5CF5-4246-9394-97AE534D4E31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{628D72E8-1CDE-4EE1-903E-EA74C844913B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{628D72E8-1CDE-4EE1-903E-EA74C844913B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{628D72E8-1CDE-4EE1-903E-EA74C844913B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{628D72E8-1CDE-4EE1-903E-EA74C844913B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
