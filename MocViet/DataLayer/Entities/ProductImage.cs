@@ -4,12 +4,11 @@ using System.Collections.Generic;
 namespace DataLayer.Entities;
 
 public partial class ProductImage : BaseEntity
-{
-    public int ImageId { get; set; }
+    {
+        // Removed ImageId property (use BaseEntity.Id)
 
-    public int ProductId { get; set; }
+        public string ProductId { get; set; }
+        public string ImageUrl { get; set; } = null!;
 
-    public string ImageUrl { get; set; } = null!;
-
-    public virtual Product Product { get; set; } = null!;
-}
+        public virtual Product Product { get; set; } = null!;
+    }
