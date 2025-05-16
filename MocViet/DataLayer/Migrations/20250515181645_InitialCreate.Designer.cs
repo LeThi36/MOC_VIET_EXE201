@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(MocVietContext))]
-    [Migration("20250515140057_InitialCreate")]
+    [Migration("20250515181645_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

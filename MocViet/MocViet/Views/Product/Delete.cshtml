@@ -1,0 +1,48 @@
+﻿@model DataLayer.Entities.Product
+
+@{
+    ViewData["Title"] = "Xóa sản phẩm";
+}
+
+<h2>Xác nhận xóa sản phẩm</h2>
+
+<div class="alert alert-warning">
+    <h4>Bạn có chắc chắn muốn xóa sản phẩm này?</h4>
+</div>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Tên sản phẩm</dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+
+        <dt class="col-sm-2">Giá</dt>
+        <dd class="col-sm-10">@Model.Price.ToString("C")</dd>
+
+        <dt class="col-sm-2">Kho</dt>
+        <dd class="col-sm-10">@Model.Stock</dd>
+
+        <dt class="col-sm-2">Mô tả</dt>
+        <dd class="col-sm-10">@Model.Description</dd>
+
+        <dt class="col-sm-2">Ảnh</dt>
+        <dd class="col-sm-10">
+            @if (Model.ProductImages != null && Model.ProductImages.Any())
+            {
+                foreach (var image in Model.ProductImages)
+                {
+                    <img src="@image.ImageUrl" alt="Ảnh sản phẩm" width="150" class="me-2 mb-2" />
+                }
+            }
+            else
+            {
+                <span>Không có ảnh.</span>
+            }
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" method="post" asp-route-id="@Model.Id">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>

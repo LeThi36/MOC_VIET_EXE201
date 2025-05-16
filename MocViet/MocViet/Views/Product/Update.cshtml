@@ -1,0 +1,76 @@
+﻿@model BussinessLayer.DTOs.Product.ProductUpdateDto
+
+@{
+    ViewData["Title"] = "Cập nhật sản phẩm";
+    var existingImages = ViewBag.ExistingImages as List<DataLayer.Entities.ProductImage>;
+}
+
+<h2>Cập nhật sản phẩm</h2>
+
+<form asp-action="Update" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Stock"></label>
+        <input asp-for="Stock" class="form-control" />
+        <span asp-validation-for="Stock" class="text-danger"></span>
+    </div>
+
+    <div class="form-group form-check">
+        <input asp-for="IsActive" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label">Kích hoạt</label>
+    </div>
+
+    <div class="form-group">
+        <label>Thêm ảnh mới</label>
+        <input type="file" name="newImages" class="form-control" multiple />
+    </div>
+
+    <div class="form-group">
+        <label>Ảnh hiện tại:</label>
+        <div class="row">
+            @if (existingImages != null && existingImages.Count > 0)
+            {
+                foreach (var img in existingImages)
+                {
+                    <div class="col-md-3 text-center mb-3">
+                        <img src="@img.ImageUrl" class="img-thumbnail" style="width: 100%; height: auto;" />
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" name="DeleteImageIds" value="@img.Id" />
+                            <label class="form-check-label">Xóa ảnh</label>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Không có ảnh nào.</p>
+            }
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
