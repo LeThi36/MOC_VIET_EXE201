@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataLayer.Enum;
+using System;
 using System.Collections.Generic;
 
 namespace DataLayer.Entities;
@@ -12,7 +13,7 @@ public partial class User : BaseEntity
     public string PasswordHash { get; set; } = null!;
     public string? Phone { get; set; }
     public string? Address { get; set; }
-    public int UserRole { get; set; }
+    public Role UserRole { get; set; }
     public DateTime? CreatedAt { get; set; }
 
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
