@@ -1,8 +1,11 @@
 ﻿using BussinessLayer.DTOs.Product;
 using BussinessLayer.Services.Abstraction;
 using DataLayer.Entities;
+using DataLayer.Enum;
+using DataLayer.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
 
 namespace MocViet.Controllers
 {
@@ -10,16 +13,30 @@ namespace MocViet.Controllers
     {
         private readonly IProductService _productService;
         private readonly IWebHostEnvironment _env;
+        private readonly ICategoryService _categoryService;
+        private readonly IGenericRepository<User> _sellerRepo;
 
-        public ProductController(IProductService productService, IWebHostEnvironment env)
+        public ProductController(
+     IProductService productService,
+     IWebHostEnvironment env,
+     ICategoryService categoryService,
+     IGenericRepository<User> sellerRepo)
         {
             _productService = productService;
             _env = env;
+            _categoryService = categoryService;
+            _sellerRepo = sellerRepo;
         }
 
+
         // GET: Product/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Categories = await _categoryService.GetAllAsync();
+            ViewBag.Sellers = (await _sellerRepo.GetAllAsync())
+    .Where(u => u.UserRole == Role.Seller)
+    .ToList();
+
             return View();
         }
 
@@ -28,7 +45,11 @@ namespace MocViet.Controllers
         public async Task<IActionResult> Create(ProductCreateDto dto, List<IFormFile> images)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = await _categoryService.GetAllAsync();
+                ViewBag.Sellers = await _sellerRepo.GetAllAsync();
                 return View(dto);
+            }
 
             dto.ImageUrls = new List<string>();
 
@@ -50,6 +71,7 @@ namespace MocViet.Controllers
             await _productService.CreateAsync(dto);
             return RedirectToAction("Index");
         }
+
 
         // GET: Product/Update/{id}
         public async Task<IActionResult> Update(string id)
@@ -151,8 +173,8 @@ namespace MocViet.Controllers
         // GET: Product/Index
         public async Task<IActionResult> Index()
         {
-            var products = await _productService.GetAllAsync();
-            return View(products);
+            var productDtos = await _productService.GetAllAsync(); 
+            return View(productDtos); 
         }
 
         // GET: Product/Details/{id}

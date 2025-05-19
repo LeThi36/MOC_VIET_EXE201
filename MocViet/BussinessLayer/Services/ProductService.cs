@@ -121,9 +121,34 @@ namespace BussinessLayer.Services
         }
 
 
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        public async Task<IEnumerable<ProductDto>> GetAllAsync()
         {
-            return await _productRepo.GetAllAsync();
+            var products = await _context.Products
+                .Include(p => p.ProductImages)
+                .Include(p => p.Category)
+                .Include(p => p.Seller)
+                .ToListAsync();
+
+            return products.Select(p => new ProductDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Stock = p.Stock,
+                IsActive = p.IsActive,
+                SellerId = p.SellerId,
+                CategoryId = p.CategoryId,
+                ProductImages = p.ProductImages.Select(i => new ProductImageDto
+                {
+                    Id = i.Id,
+                    ImageUrl = i.ImageUrl,
+                    ProductId = i.ProductId
+                }).ToList()
+            });
         }
+
+
+
     }
 }

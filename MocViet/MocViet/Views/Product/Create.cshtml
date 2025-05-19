@@ -1,6 +1,5 @@
 ﻿@model BussinessLayer.DTOs.Product.ProductCreateDto
 
-
 @{
     ViewData["Title"] = "Create Product";
 }
@@ -30,13 +29,19 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="CategoryId" class="form-label">Category ID</label>
-        <input asp-for="CategoryId" class="form-control" />
+        <label asp-for="CategoryId" class="form-label">Category</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+            <option value="">-- Select Category --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="SellerId" class="form-label">Seller ID</label>
-        <input asp-for="SellerId" class="form-control" />
+        <label asp-for="SellerId" class="form-label">Seller</label>
+        <select asp-for="SellerId" class="form-control" asp-items="@(new SelectList(ViewBag.Sellers, "Id", "FullName"))">
+            <option value="">-- Select Seller --</option>
+        </select>
+        <span asp-validation-for="SellerId" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -49,7 +54,9 @@
 </form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @(Html.RenderPartialAsync("_ValidationScriptsPartial"))
 }
+
+
+
+
