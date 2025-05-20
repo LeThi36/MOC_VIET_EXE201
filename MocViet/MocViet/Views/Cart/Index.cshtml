@@ -1,0 +1,51 @@
+﻿@model BussinessLayer.DTOs.Cart.CartDto
+
+@{
+    ViewData["Title"] = "Giỏ hàng của bạn";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model == null || !Model.Items.Any())
+{
+    <p>Giỏ hàng trống.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Tổng</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.UnitPrice.ToString("N0") ₫</td>
+                    <td>
+                        <form method="post" asp-action="Update">
+                            <input type="hidden" name="cartItemId" value="@item.Id" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" />
+                            <button type="submit" class="btn btn-sm btn-primary">Cập nhật</button>
+                        </form>
+                    </td>
+                    <td>@(item.Quantity * item.UnitPrice).ToString("N0") ₫</td>
+                    <td>
+                        <form method="post" asp-action="Delete">
+                            <input type="hidden" name="cartItemId" value="@item.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Tổng: @Model.Items.Sum(i => i.Quantity * i.UnitPrice).ToString("N0") ₫</h4>
+}
