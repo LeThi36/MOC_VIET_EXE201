@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BussinessLayer.DTOs.Product.ProductDto>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+}
+
+<h2>Danh sách sản phẩm</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Tồn kho</th>
+            <th>Trạng thái</th>
+            <th>Hình ảnh</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price.ToString("N0") ₫</td>
+                <td>@item.Stock</td>
+                <td>
+                    @(item.IsActive == true ? "Đang bán" : "Ngừng bán")
+                </td>
+                <td>
+                    @if (item.ProductImages?.Any() == true)
+                    {
+                        <img src="@item.ProductImages.First().ImageUrl" width="80" />
+                    }
+                    else
+                    {
+                        <span>Không có ảnh</span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Product", new { id = item.Id })">Chi tiết</a>
+                    <a class="btn btn-warning btn-sm" href="@Url.Action("Update", "Product", new { id = item.Id })">Sửa</a>
+                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "Product", new { id = item.Id })">Xóa</a>
+                    <form method="post" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@item.Id" style="display:inline;">
+        <input type="hidden" name="quantity" value="1" />
+        <button type="submit" class="btn btn-success btn-sm">🛒 Thêm vào giỏ</button>
+    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" href="@Url.Action("Create", "Product")">Thêm sản phẩm</a>

@@ -14,7 +14,8 @@ namespace BussinessLayer.Services.Abstraction
         Task UpdateAsync(ProductUpdateDto dto);
         Task DeleteAsync(string id);
         Task<Product> GetByIdAsync(string id);
-        Task<IEnumerable<Product>> GetAllAsync();
-    }
+        Task<IEnumerable<ProductDto>> GetAllAsync();
 
+
+    }
 }
