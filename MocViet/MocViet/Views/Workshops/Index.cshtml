@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MocViet.ViewModel.Workshop.WorkshopListItemVm>
+
+@{
+    ViewData["Title"] = "Workshops";
+}
+
+<h1>Workshops</h1>
+
+<div class="mb-3">
+    @* Nút tạo mới chỉ Seller *@
+    @if (User.IsInRole("Seller") || User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-primary">Create New Workshop</a>
+    }
+
+    @* Nút xem Expired chỉ Seller hoặc Admin *@
+    @if (User.IsInRole("Seller") || User.IsInRole("Admin"))
+    {
+        <a asp-action="Expired" class="btn btn-secondary ml-2">View Expired Workshops</a>
+    }
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Fee</th>
+            <th>Status</th>
+            <th>Host</th>
+            <th>Location</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.StartTime?.ToString("g")</td>
+                <td>@item.EndTime?.ToString("g")</td>
+                <td>@item.Fee?.ToString()</td>
+                <td>@item.Status</td>
+                <td>@item.HostName</td>
+                <td>@item.LocationAddress</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    @if (User.IsInRole("Seller") || User.IsInRole("Admin"))
+                    {
+                        <a asp-action = "Edit" asp-route-id = "@item.Id" >Edit </a>
+                        <a asp-action = "Delete" asp-route-id = "@item.Id" >Delete </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

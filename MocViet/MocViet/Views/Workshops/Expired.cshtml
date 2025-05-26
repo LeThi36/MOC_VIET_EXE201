@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DataLayer.Entities.Workshop>
+
+@{
+    ViewData["Title"] = "Expired Workshops";
+}
+
+<h1>Expired Workshops</h1>
+
+<p>
+    @if (User.IsInRole("Seller") || User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    }
+    @if (User.IsInRole("Seller") || User.IsInRole("Admin"))
+    {
+        <a asp-action="Index" class="btn btn-secondary ml-2">Upcoming & Ongoing</a>
+    }
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Fee</th>
+            <th>Host</th>
+            <th>Location</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var w in Model)
+        {
+            <tr>
+                <td>@w.Title</td>
+                <td>@(w.StartTime?.ToString("g"))</td>
+                <td>@(w.EndTime?.ToString("g"))</td>
+                <td>@w.Fee:C</td>
+                <td>@w.Host.FullName</td>
+                <td>@w.Location?.Address</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@w.Id">Details</a>
+                    @if (User.IsInRole("Seller") || User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@w.Id">Edit </a>
+                        <a asp-action="Delete" asp-route-id="@w.Id">Delete </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace MocViet.ViewModel
+namespace MocViet.ViewModel.Login
 {
     public class LoginViewModel
     {
