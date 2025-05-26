@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Scripting;
 using System.Security.Claims;
-using MocViet.ViewModel;
+using MocViet.ViewModel.Login;
 
 namespace MocViet.Controllers
 {

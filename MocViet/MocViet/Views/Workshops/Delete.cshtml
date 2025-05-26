@@ -1,0 +1,25 @@
+﻿@model DataLayer.Entities.Workshop
+
+@{
+    ViewData["Title"] = "Delete Workshop";
+}
+
+<h1>Delete Workshop</h1>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-2">Title</dt>
+    <dd class="col-sm-10">@Model.Title</dd>
+    <dt class="col-sm-2">Start Time</dt>
+    <dd class="col-sm-10">@Model.StartTime?.ToString("f")</dd>
+    <dt class="col-sm-2">End Time</dt>
+    <dd class="col-sm-10">@Model.EndTime?.ToString("f")</dd>
+    <dt class="col-sm-2">Location</dt>
+    <dd class="col-sm-10">@Model.Location?.Address</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
